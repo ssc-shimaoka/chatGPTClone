@@ -13,7 +13,6 @@ export default function Home() {
 
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_OPENAPI_KEY,
-    //apiKey: "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"
   });
 
   const openai = new OpenAIApi(configuration);
@@ -37,6 +36,7 @@ export default function Home() {
     setIsLoading(false);
   };
 
+  // 画面出力
   return (
     <div>
       <Head>
