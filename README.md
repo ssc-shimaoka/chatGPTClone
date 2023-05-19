@@ -1,3 +1,16 @@
+chatGPTのクローンをopenAI_APIを使って作成してみた。
+
+全体会議の発表で何をテーマにしようかと思っていたので
+YouTubeの動画を参照し、自分でも作成
+
+参照URL：
+https://www.youtube.com/watch?v=-ti_Li9j7HE&t=1552s
+
+5/19　不具合を修正し、動画と同じ動作が出来るようになった。
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
