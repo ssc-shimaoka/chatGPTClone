@@ -12,7 +12,8 @@ export default function Home() {
   const [isLoding, setIsLoading] = useState(false);
 
   const configuration = new Configuration({
-    apikey: process.env.NEXT_PUBLIC_OPENAPI_KEY,
+    apiKey: process.env.NEXT_PUBLIC_OPENAPI_KEY,
+    //apiKey: "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"
   });
 
   const openai = new OpenAIApi(configuration);
@@ -33,8 +34,6 @@ export default function Home() {
       {sender: "ai", text: response.data.choices[0].message?.content},
     ]);
 
-    console.log(messages);
-    //console.log(response.data.choices[0].message?.content);
     setIsLoading(false);
   };
 
