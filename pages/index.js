@@ -34,6 +34,7 @@ export default function Home() {
     ]);
 
     setIsLoading(false);
+    setMessage("");
   };
 
   // 画面出力
