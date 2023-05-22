@@ -1,39 +1,58 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
+// OpenAI APIの「Configuration」「OpenAIApi」をインポート
 import { Configuration, OpenAIApi } from "openai"
 import { useState } from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
 
+//const inter = Inter({ subsets: ['latin'] })
+
+//アプリ内の情報を内部データとして持つ
 export default function Home() {
+  //chatGPTに対する質問の入力欄のデータ
   const [message, setMessage] = useState("");
+  //chatGPTとの会話データ（入力・出力共に）
   const [messages, setMessages] = useState([]);
+  //chatGPTに質問中可の状態
   const [isLoding, setIsLoading] = useState(false);
 
+  //OPENAIAPIのアクセスキー情報を設定
   const configuration = new Configuration({
     apiKey: process.env.NEXT_PUBLIC_OPENAPI_KEY,
   });
 
+  // OpenAIApiインスタンス生成
   const openai = new OpenAIApi(configuration);
 
+  /**
+   * OPENAPI送信処理（非同期）
+   */
   const handleSubmit = async (e) => {
+    //
     e.preventDefault();
+    //質問中に状態変更
     setIsLoading(true);
 
     //APIを叩く
+    //GPT3.5のモデルに、入力したデータにて質問する。
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: message}],
     });
 
+    //GPTから返された情報を保持しているデータリストに追加する
+    //入力情報は"user"
+    //GPTからのResponseは"ai"
     setMessages((prevMessages) => [
       ...prevMessages,
       {sender: "user", text: message},
       {sender: "ai", text: response.data.choices[0].message?.content},
     ]);
 
+    //質問完了に状態変更
     setIsLoading(false);
+    //入力欄を初期化
     setMessage("");
   };
 
