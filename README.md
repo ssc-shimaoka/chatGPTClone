@@ -8,6 +8,8 @@ https://www.youtube.com/watch?v=-ti_Li9j7HE&t=1552s
 
 5/19　不具合を修正し、動画と同じ動作が出来るようになった。
 
+5/24　呼び出すAPIを画像生成APIに変更
+
 
 
 

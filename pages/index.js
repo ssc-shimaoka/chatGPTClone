@@ -42,7 +42,7 @@ export default function Home() {
       size: "256x256",
     });
 
-
+  // 取得した画像URLをHTMLの<img>要素に設定します。
     const image_Url = response.data.data[0].url;
     const imgElement = document.getElementById('generatedImage');
     imgElement.src = image_Url;
@@ -54,11 +54,6 @@ export default function Home() {
       //...prevMessages,
       //{sender: "user", text: message},
       //{sender: "ai", text: response.data.choices[0].message?.content},
-      //const imageUrl = response.data.image_url;
-
-      // 取得した画像URLをHTMLの<img>要素に設定します。
-      // const imgElement = document.getElementById('generatedImage');
-      // imgElement.src = image_Url;
     ]);
 
     //質問完了に状態変更
