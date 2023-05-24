@@ -36,18 +36,29 @@ export default function Home() {
 
     //APIを叩く
     //GPT3.5のモデルに、入力したデータにて質問する。
-    const response = await openai.createChatCompletion({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: message}],
+    const response = await openai.createImage({
+      prompt: message,
+      n: 1,
+      size: "256x256",
     });
+
+
+    const image_Url = response.data.data[0].url;
+    const imgElement = document.getElementById('generatedImage');
+    imgElement.src = image_Url;
 
     //GPTから返された情報を保持しているデータリストに追加する
     //入力情報は"user"
     //GPTからのResponseは"ai"
     setMessages((prevMessages) => [
-      ...prevMessages,
-      {sender: "user", text: message},
-      {sender: "ai", text: response.data.choices[0].message?.content},
+      //...prevMessages,
+      //{sender: "user", text: message},
+      //{sender: "ai", text: response.data.choices[0].message?.content},
+      //const imageUrl = response.data.image_url;
+
+      // 取得した画像URLをHTMLの<img>要素に設定します。
+      // const imgElement = document.getElementById('generatedImage');
+      // imgElement.src = image_Url;
     ]);
 
     //質問完了に状態変更
@@ -69,13 +80,7 @@ export default function Home() {
         <div className="max-w-lg w-full">
           <div style={{height: "650px"}} className="bg-gray-100 w-full p-4 h-96 overflow-scroll rounded-lg">
             <span className="text-center block font-medium text-2xl border-b-2 border-indigo-400 pb-4 mb-3">chatGPT-Clone</span>
-            {messages.map((message, index) => (
-              <div className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"} mb-2`} key={index}>
-                <div className={`${message.sender === "user" ? "bg-indigo-400 text-white" : "bg-gray-200"} p-2 rounded-md`}>
-                  {message.text}
-                </div>
-              </div>
-            ))}
+            <img id="generatedImage" />
           </div>
           <form className="w-full" onSubmit={(e) => handleSubmit(e)}>
             <div className="flex items-center p-4 bg-gray-100 rounded-b-lg w-full">
